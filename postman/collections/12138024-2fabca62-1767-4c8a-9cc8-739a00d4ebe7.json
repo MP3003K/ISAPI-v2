@@ -28,7 +28,7 @@
 									"    : Math.floor(Math.random() * (max - min + 1)) + min;\r",
 									"\r",
 									"// Guardar como variable global (puedes usarla como {{randomNumber}})\r",
-									"pm.globals.set(\"randomNumber\", randomNumber);\r",
+									"pm.globals.set(\"numeroRandom\", randomNumber);\r",
 									""
 								],
 								"type": "text/javascript",
@@ -53,7 +53,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/ISAPI/Security/sessionLogin/capabilities?username={{usuario}}&random={{$randomAlphaNumeric}}",
+							"raw": "https://{{ip}}/ISAPI/Security/sessionLogin/capabilities?username={{usuario}}&random={{numeroRandom}}",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
@@ -71,7 +71,7 @@
 								},
 								{
 									"key": "random",
-									"value": "{{$randomAlphaNumeric}}"
+									"value": "{{numeroRandom}}"
 								}
 							]
 						}
