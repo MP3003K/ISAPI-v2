@@ -7,79 +7,78 @@
 	"item": [
 		{
 			"name": "1. Login",
-			"item": [
+			"item": [],
+			"id": "12138024-e9a35a0b-e65f-4f9f-9bf7-aed2dbd8017a"
+		},
+		{
+			"name": "New Request",
+			"event": [
 				{
-					"name": "New Request",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "413a3b23-261c-413d-ac30-9eb3430e406a",
-								"exec": [
-									"// Genera un número aleatorio con entre 1 y 8 dígitos\r",
-									"const digits = Math.floor(Math.random() * 8) + 1; // entre 1 y 8\r",
-									"const min = Math.pow(10, digits - 1);\r",
-									"const max = Math.pow(10, digits) - 1;\r",
-									"\r",
-									"// Si es 1 dígito, min será 1, max será 9\r",
-									"// Si es 8 dígitos, min será 10_000_000, max será 99_999_999\r",
-									"const randomNumber = digits === 1\r",
-									"    ? Math.floor(Math.random() * 9) + 1\r",
-									"    : Math.floor(Math.random() * (max - min + 1)) + min;\r",
-									"\r",
-									"// Guardar como variable global (puedes usarla como {{randomNumber}})\r",
-									"pm.globals.set(\"numeroRandom\", randomNumber);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "12138024-5371e473-c45d-4d24-b0a7-ca54860e07e7",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{ip}}/ISAPI/Security/sessionLogin/capabilities?username={{usuario}}&random={{numeroRandom}}",
-							"protocol": "https",
-							"host": [
-								"{{ip}}"
-							],
-							"path": [
-								"ISAPI",
-								"Security",
-								"sessionLogin",
-								"capabilities"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "{{usuario}}"
-								},
-								{
-									"key": "random",
-									"value": "{{numeroRandom}}"
-								}
-							]
-						}
-					},
-					"response": []
+					"listen": "prerequest",
+					"script": {
+						"id": "413a3b23-261c-413d-ac30-9eb3430e406a",
+						"exec": [
+							"// Genera un número aleatorio con entre 1 y 8 dígitos\r",
+							"const digits = Math.floor(Math.random() * 8) + 1; // entre 1 y 8\r",
+							"const min = Math.pow(10, digits - 1);\r",
+							"const max = Math.pow(10, digits) - 1;\r",
+							"\r",
+							"// Si es 1 dígito, min será 1, max será 9\r",
+							"// Si es 8 dígitos, min será 10_000_000, max será 99_999_999\r",
+							"const randomNumber = digits === 1\r",
+							"    ? Math.floor(Math.random() * 9) + 1\r",
+							"    : Math.floor(Math.random() * (max - min + 1)) + min;\r",
+							"\r",
+							"// Guardar como variable global (puedes usarla como {{randomNumber}})\r",
+							"pm.globals.set(\"numeroRandom\", randomNumber);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
 				}
 			],
-			"id": "12138024-e9a35a0b-e65f-4f9f-9bf7-aed2dbd8017a"
+			"id": "12138024-5371e473-c45d-4d24-b0a7-ca54860e07e7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}/ISAPI/Security/sessionLogin/capabilities?username={{usuario}}&random={{numeroRandom}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"ISAPI",
+						"Security",
+						"sessionLogin",
+						"capabilities"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{usuario}}"
+						},
+						{
+							"key": "random",
+							"value": "{{numeroRandom}}"
+						}
+					]
+				}
+			},
+			"response": []
 		},
 		{
 			"name": "ActualizarFoto",
