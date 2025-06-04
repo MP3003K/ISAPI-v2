@@ -196,67 +196,6 @@
 			"response": []
 		},
 		{
-			"name": "Actualizar Persona",
-			"id": "12138024-787904ba-e0cb-4e20-bf88-db561ccbb1a4",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "Shortveins3003",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "admin",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"key": "SessionTag",
-						"value": "{{SessionTag}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"UserInfo\": {\r\n        \"employeeNo\": \"11\",\r\n        \"userType\": \"normal\",\r\n        \"faceLibType\": \"blackFD\",\r\n        \"faceList\": [\r\n            {\r\n                \"FPID\": \"11\",\r\n                    \"faceURL\": \"https://192.168.18.248/LOCALS/pic/enrlFace/0/0000000002.jpg@WEB000000000008\"\r\n            }\r\n        ],\r\n        \"name\": \"11\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Modify?format=json",
-					"protocol": "https",
-					"host": [
-						"{{ip}}"
-					],
-					"path": [
-						"ISAPI",
-						"AccessControl",
-						"UserInfo",
-						"Modify"
-					],
-					"query": [
-						{
-							"key": "format",
-							"value": "json"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Crear Foto",
 			"id": "12138024-cfd6cb38-be4b-4ee0-9feb-4ef11e0b22bf",
 			"protocolProfileBehavior": {
