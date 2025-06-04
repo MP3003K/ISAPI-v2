@@ -616,7 +616,7 @@
 						"header": [
 							{
 								"key": "SessionTag",
-								"value": "{{SessionTag}}",
+								"value": "{{sessionTag}}",
 								"type": "text"
 							}
 						],
