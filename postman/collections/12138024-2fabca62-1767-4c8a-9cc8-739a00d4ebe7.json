@@ -362,21 +362,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Actualizar Foto v2",
-			"id": "12138024-4bd27e85-d296-4e93-88f1-ecbe514b8794",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
 		}
 	]
 }
