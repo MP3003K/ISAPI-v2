@@ -861,7 +861,7 @@
 						"header": [
 							{
 								"key": "SessionTag",
-								"value": "{{SessionTag}}",
+								"value": "{{sessionTag}}",
 								"type": "text"
 							}
 						],
@@ -878,7 +878,7 @@
 									"key": "FaceImage",
 									"type": "file",
 									"uuid": "173e8def-1d4f-4f94-a281-2ee1f69e8c0a",
-									"src": "/C:/Users/nitro/Downloads/me (Pequeña) (1).jpg"
+									"src": "/C:/Users/nitro/Downloads/mijail_palomino.jpg"
 								}
 							]
 						},
