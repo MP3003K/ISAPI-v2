@@ -433,50 +433,6 @@
 			"response": []
 		},
 		{
-			"name": "Buscar Personas",
-			"id": "12138024-1e3de70c-1303-4c1d-ba50-44454c3a7686",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "SessionTag",
-						"value": "{{SessionTag}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"UserInfoSearchCond\": {\r\n    \"searchID\": \"1\",\r\n    \"searchResultPosition\": 0,\r\n    \"maxResults\": 50\r\n  }\r\n}"
-				},
-				"url": {
-					"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Search?format=json",
-					"protocol": "https",
-					"host": [
-						"{{ip}}"
-					],
-					"path": [
-						"ISAPI",
-						"AccessControl",
-						"UserInfo",
-						"Search"
-					],
-					"query": [
-						{
-							"key": "format",
-							"value": "json"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Lista Rostros Creados",
 			"id": "12138024-90e7732b-b0f3-490c-83b9-0dcbc9fd8e21",
 			"protocolProfileBehavior": {
