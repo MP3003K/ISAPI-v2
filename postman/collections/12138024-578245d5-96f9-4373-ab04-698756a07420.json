@@ -1,0 +1,1141 @@
+{
+	"info": {
+		"_postman_id": "12138024-578245d5-96f9-4373-ab04-698756a07420",
+		"name": "ISAPI",
+		"description": "# 📄 Get started here\n\nThis template contains a boilerplate for documentation that you can quickly customize and reuse.\n\n## 🔖 How to use this template\n\n- Replace the content given brackets (()) with your API's details.\n- Tips are formatted in `codespan` - feel free to read and remove them.\n    \n\n---\n\n`Start with a brief overview of what your API offers.`\n\nThe ((product name)) provides many API products, tools, and resources that enable you to ((add product value here)).\n\n`You can also list the APIs you offer, link to the relevant pages, or do both in this section.`\n\n## **Getting started guide**\n\n`List the steps or points required to start using your APIs. Make sure to cover everything required to reach success with your API as quickly as possible.`\n\nTo start using the ((add APIs here)), you need to -\n\n`The points given below are from The Postman API's documentation. You can reference it to write your own getting started guide.`\n\n- You must use a valid API Key to send requests to the API endpoints. You can get your API key from Postman's [integrations dashboard](https://go.postman.co/settings/me/api-keys).\n- The API has [rate and usage limits](https://learning.postman.com/docs/developer/postman-api/postman-api-rate-limits/).\n- The API only responds to HTTPS-secured communications. Any requests sent via HTTP return an HTTP 301 redirect to the corresponding HTTPS resources.\n- The API returns request responses in JSON format. When an API request returns an error, it is sent in the JSON response as an error key.\n    \n\n## Authentication\n\n`Add details on the authorization keys/tokens required, steps that cover how to get them, and the relevant error codes.`\n\nThe ((product name)) API uses ((add your API's authorization type)) for authentication.\n\n`The details given below are from the Postman API's documentation. You can reference it to write your own authentication section.`\n\nPostman uses API keys for authentication. You can generate a Postman API key in the [API keys](https://postman.postman.co/settings/me/api-keys) section of your Postman account settings.\n\nYou must include an API key in each request to the Postman API with the X-Api-Key request header.\n\n### Authentication error response\n\nIf an API key is missing, malformed, or invalid, you will receive an HTTP 401 Unauthorized response code.\n\n## Rate and usage limits\n\n`Use this section to cover your APIs' terms of use. Include API limits, constraints, and relevant error codes, so consumers understand the permitted API usage and practices.`\n\n`The example given below is from The Postman API's documentation. Use it as a reference to write your APIs' terms of use.`\n\nAPI access rate limits apply at a per-API key basis in unit time. The limit is 300 requests per minute. Also, depending on your plan, you may have usage limits. If you exceed either limit, your request will return an HTTP 429 Too Many Requests status code.\n\nEach API response returns the following set of headers to help you identify your use status:\n\n| Header | Description |\n| --- | --- |\n| `X-RateLimit-Limit` | The maximum number of requests that the consumer is permitted to make per minute. |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window. |\n| `X-RateLimit-Reset` | The time at which the current rate limit window resets in UTC epoch seconds. |\n\n### 503 response\n\nAn HTTP `503` response from our servers indicates there is an unexpected spike in API access traffic. The server is usually operational within the next five minutes. If the outage persists or you receive any other form of an HTTP `5XX` error, [contact support](https://support.postman.com/hc/en-us/requests/new/).\n\n### **Need some help?**\n\n`Add links that customers can refer to whenever they need help.`\n\nIn case you have questions, go through our tutorials ((link to your video or help documentation here)). Or visit our FAQ page ((link to the relevant page)).\n\nOr you can check out our community forum, there’s a good chance our community has an answer for you. Visit our developer forum ((link to developer forum)) to review topics, ask questions, and learn from others.\n\n`You can also document or add links to libraries, code examples, and other resources needed to make a request.`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Login",
+			"item": [
+				{
+					"name": "1.1 capabilities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c1cfb5e5-20a3-49e5-8aac-ef5e9ad2e03a",
+								"exec": [
+									"/**\r",
+									" * REQUISITOS:\r",
+									" * - Variables globales definidas: \r",
+									" *    - 'ip' (IP del dispositivo)\r",
+									" *    - 'usuario' (nombre de usuario)\r",
+									" *    - 'contraseña' (contraseña en texto plano)\r",
+									" */\r",
+									"\r",
+									"try {\r",
+									"    // Obtener el XML response del request capabilities\r",
+									"    let xml = pm.response.text();\r",
+									"\r",
+									"    // Convertir XML a JSON con xml2Json (función de Postman)\r",
+									"    let json = xml2Json(xml);\r",
+									"    console.log(\"XML convertido a JSON:\", json);\r",
+									"\r",
+									"    // Extraer el nodo SessionLoginCap\r",
+									"    let data = json?.SessionLoginCap;\r",
+									"    if (!data) {\r",
+									"        console.error(\"❌ No se encontró el nodo SessionLoginCap.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    // Extraer datos necesarios\r",
+									"    let salt = data.salt;\r",
+									"    let iterations = parseInt(data.iterations, 10);\r",
+									"    let sessionID = data.sessionID;\r",
+									"    let sessionIDVersion = data.sessionIDVersion || \"3\";\r",
+									"\r",
+									"    if (!salt || !iterations || !sessionID) {\r",
+									"        console.error(\"❌ Faltan datos necesarios (salt, iterations, sessionID).\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    // Extraer isNeedSessionTag desde isSupportSessionTag (puede venir como objeto o string)\r",
+									"    let isSupportSessionTagRaw = data.isSupportSessionTag;\r",
+									"    let isNeedSessionTag;\r",
+									"\r",
+									"    if (typeof isSupportSessionTagRaw === \"object\") {\r",
+									"        if (\"#text\" in isSupportSessionTagRaw) {\r",
+									"            isNeedSessionTag = isSupportSessionTagRaw[\"#text\"];\r",
+									"        } else {\r",
+									"            isNeedSessionTag = isSupportSessionTagRaw.toString();\r",
+									"        }\r",
+									"    } else {\r",
+									"        isNeedSessionTag = isSupportSessionTagRaw;\r",
+									"    }\r",
+									"\r",
+									"    isNeedSessionTag = isNeedSessionTag.toString().toLowerCase() === \"true\";\r",
+									"\r",
+									"    // Obtener usuario y contraseña de variables globales\r",
+									"    let usuario = pm.globals.get(\"usuario\");\r",
+									"    let contraseña = pm.globals.get(\"contraseña\");\r",
+									"\r",
+									"    if (!usuario || !contraseña) {\r",
+									"        console.error(\"❌ Las variables globales 'usuario' o 'contraseña' no están definidas.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    // Hashear la contraseña con PBKDF2 usando CryptoJS\r",
+									"    // La salt debe convertirse de hexadecimal a un WordArray\r",
+									"    let hashedPassword = CryptoJS.PBKDF2(\r",
+									"        contraseña,\r",
+									"        CryptoJS.enc.Hex.parse(salt),\r",
+									"        {\r",
+									"            keySize: 256 / 32,  // 256 bits / 32 bytes\r",
+									"            iterations: iterations,\r",
+									"            hasher: CryptoJS.algo.SHA256\r",
+									"        }\r",
+									"    ).toString();\r",
+									"\r",
+									"    console.log(\"✅ Contraseña hasheada:\", hashedPassword);\r",
+									"\r",
+									"    // Construir XML para el login\r",
+									"    let loginXML = `\r",
+									"<SessionLogin>\r",
+									"    <userName>${usuario}</userName>\r",
+									"    <password>${hashedPassword}</password>\r",
+									"    <sessionID>${sessionID}</sessionID>\r",
+									"    <isSessionIDValidLongTerm>falsez</isSessionIDValidLongTerm>\r",
+									"    <sessionIDVersion>${sessionIDVersion}</sessionIDVersion>\r",
+									"    <isNeedSessionTag>${isNeedSessionTag}</isNeedSessionTag>\r",
+									"</SessionLogin>`.trim();\r",
+									"\r",
+									"    // Guardar XML completo en variable global para usar en el request login POST\r",
+									"    pm.globals.set(\"loginXML\", loginXML);\r",
+									"\r",
+									"    // Guardar otros datos útiles también globales\r",
+									"    pm.globals.set(\"sessionID\", sessionID);\r",
+									"    pm.globals.set(\"sessionIDVersion\", sessionIDVersion);\r",
+									"    pm.globals.set(\"isNeedSessionTag\", isNeedSessionTag.toString());\r",
+									"\r",
+									"    console.log(\"✅ Variables globales actualizadas con datos para login.\");\r",
+									"    console.log(\"Login XML:\", loginXML);\r",
+									"\r",
+									"} catch (e) {\r",
+									"    console.error(\"❌ Error en script de test:\", e.message);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "09709bcb-c75a-4030-9b69-c7d8fdf7cd51",
+								"exec": [
+									"/**\r",
+									" * ⚠️ REQUISITOS EN VARIABLES GLOBALES:\r",
+									" * - 'ip': IP del dispositivo\r",
+									" * - 'usuario': Nombre de usuario administrador\r",
+									" * - 'contraseña': Contraseña en texto plano\r",
+									" *\r",
+									" * 📌 OBSERVACIÓN IMPORTANTE:\r",
+									" * Este script genera un número aleatorio de 8 dígitos (entero positivo) que será único en cada ejecución.\r",
+									" * El número se almacena en la variable global 'numeroRandom' y es utilizado como parte del parámetro en la URL.\r",
+									" */\r",
+									"\r",
+									"\r",
+									"function generateUniqueRandom(lastNumber) {\r",
+									"    let newNumber;\r",
+									"    do {\r",
+									"        newNumber = Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000;\r",
+									"    } while (newNumber === lastNumber);\r",
+									"    return newNumber;\r",
+									"}\r",
+									"\r",
+									"// Obtener el último número generado (puede ser null si es la primera vez)\r",
+									"const lastNumber = pm.environment.get(\"lastNumeroRandom\");\r",
+									"\r",
+									"// Generar nuevo número único\r",
+									"const newRandomNumber = generateUniqueRandom(lastNumber);\r",
+									"\r",
+									"// Guardar nuevo número en variable 'numeroRandom'\r",
+									"pm.environment.set(\"numeroRandom\", newRandomNumber);\r",
+									"\r",
+									"// Actualizar el último número generado para la próxima ejecución\r",
+									"pm.environment.set(\"lastNumeroRandom\", newRandomNumber);\r",
+									"\r",
+									"console.log(\"Número aleatorio generado único:\", newRandomNumber);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "12138024-9f840dbd-b9a9-4721-aece-989d51570108",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"protocolVersion": "http1",
+						"strictSSL": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/Security/sessionLogin/capabilities?username={{usuario}}&random={{numeroRandom}}",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"Security",
+								"sessionLogin",
+								"capabilities"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{usuario}}"
+								},
+								{
+									"key": "random",
+									"value": "{{numeroRandom}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "12138024-a7e79334-f345-4e43-a130-5fcd1cc98658",
+							"name": "Exito",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/Security/sessionLogin/capabilities?username={{usuario}}&random={{numeroRandom}}",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"Security",
+										"sessionLogin",
+										"capabilities"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{usuario}}"
+										},
+										{
+											"key": "random",
+											"value": "{{numeroRandom}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 03 Jun 2025 13:16:50 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "532"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=97"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<SessionLoginCap version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\n    <sessionID>ed04d1b317f0c9506e493ed225328d9b60c570e7cce772d476b74ee7f0546998</sessionID>\n    <challenge>db7bd74b892c6a7108836bca81c28558</challenge>\n    <iterations>100</iterations>\n    <isIrreversible>true</isIrreversible>\n    <salt>2c5e064e259d7c157fd35bbad5e2ca6e1aa06d25660eb865fbbe7873d5efc6d9</salt>\n    <isSupportSessionTag opt=\"true\">true</isSupportSessionTag>\n    <sessionIDVersion>3</sessionIDVersion>\n</SessionLoginCap>"
+						},
+						{
+							"id": "12138024-4185b9f3-1920-4a32-a35c-12127e31bf3b",
+							"name": "Error:  {{usuario}} o {{numeroRandom}} incorrecto (Debe tener 8 digitos numericos el numero random)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/Security/sessionLogin/capabilities?username={{usuario}}&random={{numeroRandom}}",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"Security",
+										"sessionLogin",
+										"capabilities"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{usuario}}"
+										},
+										{
+											"key": "random",
+											"value": "{{numeroRandom}}"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 03 Jun 2025 12:57:34 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "358"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=98"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ResponseStatus version=\"1.0\" xmlns=\"http://www.hikvision.com/ver10/XMLSchema\">\n    <requestURL></requestURL>\n    <statusCode>4</statusCode>\n    <statusString>Invalid Operation</statusString>\n    <subStatusCode>invalidOperation</subStatusCode>\n    <errorCode>1073741830</errorCode>\n    <errorMsg>invalidOperation</errorMsg>\n</ResponseStatus>"
+						}
+					]
+				},
+				{
+					"name": "1.2. login",
+					"id": "12138024-f729afa6-3272-4ac3-a556-84ddd9302102",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "12138024-23af759c-98e4-46bd-892c-f6810b5b3d92"
+		},
+		{
+			"name": "2. Crear Persona",
+			"item": [
+				{
+					"name": "Crear Persona",
+					"id": "12138024-4f985ce0-90a8-4982-b2f4-de83163717e5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"UserInfo\": {\r\n    \"employeeNo\": \"{{personaId}}\",\r\n    \"name\": \"{{nombrePersona}}\",\r\n    \"userType\": \"normal\",\r\n    \"Valid\": {\r\n      \"enable\": false,\r\n      \"beginTime\": \"\",\r\n      \"endTime\": \"\",\r\n      \"timeType\": \"local\"\r\n    },\r\n    \"RightPlan\": [\r\n      {\r\n        \"doorNo\": 1,\r\n        \"planTemplateNo\": \"1\"\r\n      }\r\n    ],\r\n    \"doorRight\": \"1\",\r\n    \"gender\": \"{{generoPersona}}\",\r\n    \"localUIRight\": false,\r\n    \"userVerifyMode\": \"\",\r\n    \"localPassword\": \"{{pinPersona}}\",\r\n    \"closeDelayEnabled\": false\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Record?format=json",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"AccessControl",
+								"UserInfo",
+								"Record"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "12138024-8d8f1f0a-8eeb-46df-bcf9-7db23da22ea1",
+							"name": "Ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{SessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserInfo\": {\r\n        \"employeeNo\": \"EMP001\",\r\n        \"name\": \"Juan Pérez\",\r\n        \"userType\": \"normal\",\r\n        \"Valid\": {\r\n            \"enable\": false,\r\n            \"beginTime\": \"2025-06-03T00:00:00\",\r\n            \"endTime\": \"2035-06-03T23:59:59\",\r\n            \"timeType\": \"local\"\r\n        },\r\n        \"RightPlan\": [\r\n            {\r\n                \"doorNo\": 1,\r\n                \"planTemplateNo\": \"1\"\r\n            }\r\n        ],\r\n        \"doorRight\": \"1\",\r\n        \"gender\": \"male\",\r\n        \"localUIRight\": false,\r\n        \"userVerifyMode\": \"\",\r\n        \"localPassword\": \"123456\",\r\n        \"closeDelayEnabled\": false\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Record?format=json",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"AccessControl",
+										"UserInfo",
+										"Record"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 03 Jun 2025 17:31:23 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"statusCode\": 1,\n    \"statusString\": \"OK\",\n    \"subStatusCode\": \"ok\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Añadir Card",
+					"id": "12138024-84f41721-bc5a-449f-94aa-9106dc191c64",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"CardInfo\": {\r\n    \"employeeNo\": \"{{personaId}}\",\r\n    \"cardNo\": \"{{cardNo}}\",\r\n    \"cardType\": \"normalCard\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/AccessControl/CardInfo/Record?format=json",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"AccessControl",
+								"CardInfo",
+								"Record"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "12138024-604dd83b-1041-49b7-ba73-604b83439787",
+							"name": "Ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{SessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserInfo\": {\r\n        \"employeeNo\": \"EMP001\",\r\n        \"name\": \"Juan Pérez\",\r\n        \"userType\": \"normal\",\r\n        \"Valid\": {\r\n            \"enable\": false,\r\n            \"beginTime\": \"2025-06-03T00:00:00\",\r\n            \"endTime\": \"2035-06-03T23:59:59\",\r\n            \"timeType\": \"local\"\r\n        },\r\n        \"RightPlan\": [\r\n            {\r\n                \"doorNo\": 1,\r\n                \"planTemplateNo\": \"1\"\r\n            }\r\n        ],\r\n        \"doorRight\": \"1\",\r\n        \"gender\": \"male\",\r\n        \"localUIRight\": false,\r\n        \"userVerifyMode\": \"\",\r\n        \"localPassword\": \"123456\",\r\n        \"closeDelayEnabled\": false\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Record?format=json",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"AccessControl",
+										"UserInfo",
+										"Record"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 03 Jun 2025 17:31:23 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"statusCode\": 1,\n    \"statusString\": \"OK\",\n    \"subStatusCode\": \"ok\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar Foto",
+					"id": "12138024-8be6f226-e5ae-41ed-bae5-ce58229cfc94",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "JSON_SetFaceRecord",
+									"value": "{\"faceLibType\":\"blackFD\",\"FDID\":\"1\",\"FPID\":\"{{personaId}}\"}",
+									"type": "text",
+									"uuid": "7e1960e8-97df-4875-a461-04a14ff00cfa"
+								},
+								{
+									"key": "FaceImage",
+									"type": "file",
+									"uuid": "173e8def-1d4f-4f94-a281-2ee1f69e8c0a",
+									"src": "/C:/Users/nitro/Downloads/me (Pequeña) (1).jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/Intelligent/FDLib/FDSetUp?format=json",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"Intelligent",
+								"FDLib",
+								"FDSetUp"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						},
+						"description": "## API Endpoint: Update Face Record Setup\n\nThis endpoint allows you to update the face record setup for intelligent face detection. It is used to configure the parameters related to face recognition and upload the corresponding face image.\n\n### Request Method\n\n- **PUT**\n    \n\n### Request URL\n\n- `https://{{ip}}/ISAPI/Intelligent/FDLib/FDSetUp?format=json`\n    \n\n### Request Body\n\nThe request body must be sent as form-data and should include the following parameters:\n\n- **JSON_SetFaceRecord** (type: text)\n    \n    - This parameter should contain a JSON object that specifies the settings for the face record. The exact structure of this JSON object will depend on the specific configuration options available for face recognition.\n        \n- **FaceImage** (type: file)\n    \n    - This parameter should include the image file that represents the face to be recorded. The file must be in a supported image format.\n        \n\n### Response Structure\n\nThe response will typically confirm the success or failure of the operation. The structure of the response may include:\n\n- A status code indicating the result of the request (e.g., success, error).\n    \n- A message providing additional details about the operation.\n    \n\nEnsure that the request body is properly formatted and that the image file is valid to avoid errors during the update process."
+					},
+					"response": [
+						{
+							"id": "12138024-b41927be-2db4-424b-a93d-5e6bc29ce30b",
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{SessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "JSON_SetFaceRecord",
+											"value": "{\"faceLibType\":\"blackFD\",\"FDID\":\"1\",\"FPID\":\"2019113229a\"}",
+											"type": "text",
+											"uuid": "7e1960e8-97df-4875-a461-04a14ff00cfa"
+										},
+										{
+											"key": "FaceImage",
+											"type": "file",
+											"uuid": "173e8def-1d4f-4f94-a281-2ee1f69e8c0a",
+											"src": "/C:/Users/nitro/Downloads/hikvision.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/Intelligent/FDLib/FDSetUp?format=json",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"Intelligent",
+										"FDLib",
+										"FDSetUp"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 03 Jun 2025 19:46:13 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"statusCode\": 1,\n    \"statusString\": \"OK\",\n    \"subStatusCode\": \"ok\"\n}"
+						}
+					]
+				}
+			],
+			"id": "12138024-835d48aa-89b4-43dc-9445-af2493b14089"
+		},
+		{
+			"name": "Otros",
+			"item": [
+				{
+					"name": "Modificar Datos Personales de una Persona",
+					"id": "12138024-787904ba-e0cb-4e20-bf88-db561ccbb1a4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Shortveins3003",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserInfo\": {\r\n        \"employeeNo\": \"11\",\r\n        \"userType\": \"normal\",\r\n        \"faceLibType\": \"blackFD\",\r\n        \"faceList\": [\r\n            {\r\n                \"FPID\": \"11\",\r\n                    \"faceURL\": \"https://192.168.18.248/LOCALS/pic/enrlFace/0/0000000002.jpg@WEB000000000008\"\r\n            }\r\n        ],\r\n        \"name\": \"11\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Modify?format=json",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"AccessControl",
+								"UserInfo",
+								"Modify"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Personas",
+					"id": "12138024-1e3de70c-1303-4c1d-ba50-44454c3a7686",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"UserInfoSearchCond\": {\r\n    \"searchID\": \"1\",\r\n    \"searchResultPosition\": 0,\r\n    \"maxResults\": 50\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Search?format=json",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"AccessControl",
+								"UserInfo",
+								"Search"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver rostro asignado a una persona",
+					"id": "12138024-47c80833-3fac-454a-b5a4-69a565ed7601",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchResultPosition\": 0,\r\n  \"maxResults\": 10,\r\n  \"faceLibType\": \"blackFD\",\r\n  \"FDID\": \"1\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://192.168.18.248/LOCALS/pic/enrlFace/0/0000000002.jpg@WEB000000000053",
+							"protocol": "https",
+							"host": [
+								"192",
+								"168",
+								"18",
+								"248"
+							],
+							"path": [
+								"LOCALS",
+								"pic",
+								"enrlFace",
+								"0",
+								"0000000002.jpg@WEB000000000053"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista Rostros Creados",
+					"id": "12138024-90e7732b-b0f3-490c-83b9-0dcbc9fd8e21",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchResultPosition\": 0,\r\n  \"maxResults\": 10,\r\n  \"faceLibType\": \"blackFD\",\r\n  \"FDID\": \"1\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/Intelligent/FDLib/FDSearch?format=json",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"Intelligent",
+								"FDLib",
+								"FDSearch"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Capacidades Dispositivo",
+					"id": "12138024-950bfe18-d950-40a5-8096-b2e0baade37a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "{\n  \"faceLibType\": \"blackFD\",\n  \"FDID\": \"1\",\n  \"FPID\": \"mijauk2467\",\n  \"name\": \"MIJAIL\",\n  \"gender\": \"male\",\n  \"bornTime\": \"2001-03-30T00:00:00Z\",\n  \"certificateType\": \"ID\",\n  \"certificateNumber\": \"mijauk2467\",\n  \"employeeNo\": \"mijauk2467\"\n}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"uuid": "94f0d082-4d43-4a6d-8c19-56dd131a7b10",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/AccessControl/capabilities",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"AccessControl",
+								"capabilities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Capacidades Rostros",
+					"id": "12138024-4cb2bb6a-ce6b-43ee-b0b0-76af1df2f65e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Shortveins3003",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "JSON_SetFaceRecord",
+									"value": "{\n    \"faceLibType\": \"blackFD\",\n    \"FDID\": \"1\", \n    \"FPID\": \"mijauk2467\",\n    \"name\": \"MIJAIL\",\n    \"bornTime\": \"2001-03-30T00:00:00Z\",\n    \"employeeNo\": \"mijauk2467\"\n}",
+									"type": "text",
+									"uuid": "7e1960e8-97df-4875-a461-04a14ff00cfa"
+								},
+								{
+									"key": "FaceImage",
+									"type": "file",
+									"uuid": "173e8def-1d4f-4f94-a281-2ee1f69e8c0a",
+									"src": "/C:/Users/nitro/Downloads/hikvision.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/Intelligent/FDLib/capabilities?format=json",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"Intelligent",
+								"FDLib",
+								"capabilities"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "12138024-b79407b1-33c8-4989-b001-a07615b81e14"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ee7eea7e-5492-47da-b8c5-0190d07fa8c8",
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}
