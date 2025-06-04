@@ -311,57 +311,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Crear Foto Copy",
-			"id": "12138024-950bfe18-d950-40a5-8096-b2e0baade37a",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "SessionTag",
-						"value": "{{SessionTag}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "",
-							"value": "{\n  \"faceLibType\": \"blackFD\",\n  \"FDID\": \"1\",\n  \"FPID\": \"mijauk2467\",\n  \"name\": \"MIJAIL\",\n  \"gender\": \"male\",\n  \"bornTime\": \"2001-03-30T00:00:00Z\",\n  \"certificateType\": \"ID\",\n  \"certificateNumber\": \"mijauk2467\",\n  \"employeeNo\": \"mijauk2467\"\n}",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"uuid": "94f0d082-4d43-4a6d-8c19-56dd131a7b10",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "https://{{ip}}/ISAPI/AccessControl/capabilities",
-					"protocol": "https",
-					"host": [
-						"{{ip}}"
-					],
-					"path": [
-						"ISAPI",
-						"AccessControl",
-						"capabilities"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
