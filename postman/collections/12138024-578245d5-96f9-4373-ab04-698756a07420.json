@@ -10,152 +10,6 @@
 			"name": "1. Login",
 			"item": [
 				{
-					"name": "1.2. login",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "295f1056-4ed3-4249-95f7-78b722ae0525",
-								"exec": [
-									"// Eliminar la variable anterior si existe\r",
-									"pm.environment.unset(\"tiempoActual\");\r",
-									"\r",
-									"// Generar nuevo timestamp en milisegundos\r",
-									"let marcaTiempo = Date.now();\r",
-									"\r",
-									"// Guardarlo de nuevo\r",
-									"pm.environment.set(\"tiempoActual\", marcaTiempo);\r",
-									"\r",
-									"// (opcional) Mostrar en consola\r",
-									"console.log(\"Nuevo tiempoActual:\", marcaTiempo);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "f98d8c89-db22-4309-8df1-a334d41c8a42",
-								"exec": [
-									"// ==========================\r",
-									"// 1. Parsear el XML de la respuesta\r",
-									"// ==========================\r",
-									"let xmlData;\r",
-									"try {\r",
-									"    xmlData = xml2Json(responseBody);\r",
-									"} catch (e) {\r",
-									"    console.error(\"❌ Error al parsear XML:\", e);\r",
-									"}\r",
-									"\r",
-									"if (xmlData && xmlData.SessionLogin && xmlData.SessionLogin.sessionTag) {\r",
-									"    let sessionTag = xmlData.SessionLogin.sessionTag;\r",
-									"    pm.globals.set(\"sessionTag\", sessionTag);\r",
-									"    console.log(\"✅ sessionTag guardado:\", sessionTag);\r",
-									"} else {\r",
-									"    console.warn(\"⚠️ No se encontró <sessionTag> en la respuesta.\");\r",
-									"}\r",
-									"\r",
-									"// ==========================\r",
-									"// 2. Manejar cookie dinámica, sobrescribir la existente si hay\r",
-									"// ==========================\r",
-									"\r",
-									"// Obtener dominio desde variable global {{ip}}\r",
-									"let ip = pm.globals.get(\"ip\"); // Ejemplo: \"api.ejemplo.com\"\r",
-									"\r",
-									"if (!ip) {\r",
-									"    console.error(\"❌ Variable global 'ip' no está definida.\");\r",
-									"} else {\r",
-									"    // Agregar protocolo si no existe\r",
-									"    if (!ip.startsWith(\"http://\") && !ip.startsWith(\"https://\")) {\r",
-									"        ip = \"http://\" + ip;\r",
-									"    }\r",
-									"\r",
-									"    const urlBase = ip;\r",
-									"\r",
-									"    let cookies = pm.response.headers.filter(h => h.key.toLowerCase() === \"set-cookie\");\r",
-									"\r",
-									"    if (cookies.length > 0) {\r",
-									"        let cookie = cookies[0].value; // Tomamos la primera cookie recibida\r",
-									"\r",
-									"        // Extraer nombre y valor del par nombre=valor\r",
-									"        let cookieNameValue = cookie.split(\";\")[0];\r",
-									"        let [nombre, valor] = cookieNameValue.split(\"=\");\r",
-									"\r",
-									"        if (!nombre || !valor) {\r",
-									"            console.warn(\"⚠️ No se pudo extraer nombre y valor de la cookie.\");\r",
-									"        } else {\r",
-									"            // Sobrescribir (guardar) la cookie en cookie jar para el dominio (reemplaza la anterior)\r",
-									"            pm.cookies.jar().set(urlBase, cookie, function(error) {\r",
-									"                if (error) {\r",
-									"                    console.warn(\"⚠️ Error al guardar cookie en cookie jar:\", error);\r",
-									"                } else {\r",
-									"                    console.log(\"✅ Cookie sobrescrita en cookie jar para dominio:\", urlBase);\r",
-									"                    pm.globals.set(\"nombreCookieSesion\", nombre);\r",
-									"                    pm.globals.set(\"valorCookieSesion\", valor);\r",
-									"                    console.log(\"✅ Nombre y valor de cookie guardados en globals:\", nombre, valor);\r",
-									"                }\r",
-									"            });\r",
-									"        }\r",
-									"    } else {\r",
-									"        console.warn(\"⚠️ No se recibió ninguna cookie Set-Cookie en la respuesta.\");\r",
-									"    }\r",
-									"}\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "12138024-f729afa6-3272-4ac3-a556-84ddd9302102",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "SessionTag",
-								"value": "{{SessionTag}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{{loginXML}}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{ip}}/ISAPI/Security/sessionLogin?timeStamp={{tiempoActual}}",
-							"protocol": "https",
-							"host": [
-								"{{ip}}"
-							],
-							"path": [
-								"ISAPI",
-								"Security",
-								"sessionLogin"
-							],
-							"query": [
-								{
-									"key": "timeStamp",
-									"value": "{{tiempoActual}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "1.1 capabilities",
 					"event": [
 						{
@@ -490,6 +344,152 @@
 							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ResponseStatus version=\"1.0\" xmlns=\"http://www.hikvision.com/ver10/XMLSchema\">\n    <requestURL></requestURL>\n    <statusCode>4</statusCode>\n    <statusString>Invalid Operation</statusString>\n    <subStatusCode>invalidOperation</subStatusCode>\n    <errorCode>1073741830</errorCode>\n    <errorMsg>invalidOperation</errorMsg>\n</ResponseStatus>"
 						}
 					]
+				},
+				{
+					"name": "1.2. login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "295f1056-4ed3-4249-95f7-78b722ae0525",
+								"exec": [
+									"// Eliminar la variable anterior si existe\r",
+									"pm.environment.unset(\"tiempoActual\");\r",
+									"\r",
+									"// Generar nuevo timestamp en milisegundos\r",
+									"let marcaTiempo = Date.now();\r",
+									"\r",
+									"// Guardarlo de nuevo\r",
+									"pm.environment.set(\"tiempoActual\", marcaTiempo);\r",
+									"\r",
+									"// (opcional) Mostrar en consola\r",
+									"console.log(\"Nuevo tiempoActual:\", marcaTiempo);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f98d8c89-db22-4309-8df1-a334d41c8a42",
+								"exec": [
+									"// ==========================\r",
+									"// 1. Parsear el XML de la respuesta\r",
+									"// ==========================\r",
+									"let xmlData;\r",
+									"try {\r",
+									"    xmlData = xml2Json(responseBody);\r",
+									"} catch (e) {\r",
+									"    console.error(\"❌ Error al parsear XML:\", e);\r",
+									"}\r",
+									"\r",
+									"if (xmlData && xmlData.SessionLogin && xmlData.SessionLogin.sessionTag) {\r",
+									"    let sessionTag = xmlData.SessionLogin.sessionTag;\r",
+									"    pm.globals.set(\"sessionTag\", sessionTag);\r",
+									"    console.log(\"✅ sessionTag guardado:\", sessionTag);\r",
+									"} else {\r",
+									"    console.warn(\"⚠️ No se encontró <sessionTag> en la respuesta.\");\r",
+									"}\r",
+									"\r",
+									"// ==========================\r",
+									"// 2. Manejar cookie dinámica, sobrescribir la existente si hay\r",
+									"// ==========================\r",
+									"\r",
+									"// Obtener dominio desde variable global {{ip}}\r",
+									"let ip = pm.globals.get(\"ip\"); // Ejemplo: \"api.ejemplo.com\"\r",
+									"\r",
+									"if (!ip) {\r",
+									"    console.error(\"❌ Variable global 'ip' no está definida.\");\r",
+									"} else {\r",
+									"    // Agregar protocolo si no existe\r",
+									"    if (!ip.startsWith(\"http://\") && !ip.startsWith(\"https://\")) {\r",
+									"        ip = \"http://\" + ip;\r",
+									"    }\r",
+									"\r",
+									"    const urlBase = ip;\r",
+									"\r",
+									"    let cookies = pm.response.headers.filter(h => h.key.toLowerCase() === \"set-cookie\");\r",
+									"\r",
+									"    if (cookies.length > 0) {\r",
+									"        let cookie = cookies[0].value; // Tomamos la primera cookie recibida\r",
+									"\r",
+									"        // Extraer nombre y valor del par nombre=valor\r",
+									"        let cookieNameValue = cookie.split(\";\")[0];\r",
+									"        let [nombre, valor] = cookieNameValue.split(\"=\");\r",
+									"\r",
+									"        if (!nombre || !valor) {\r",
+									"            console.warn(\"⚠️ No se pudo extraer nombre y valor de la cookie.\");\r",
+									"        } else {\r",
+									"            // Sobrescribir (guardar) la cookie en cookie jar para el dominio (reemplaza la anterior)\r",
+									"            pm.cookies.jar().set(urlBase, cookie, function(error) {\r",
+									"                if (error) {\r",
+									"                    console.warn(\"⚠️ Error al guardar cookie en cookie jar:\", error);\r",
+									"                } else {\r",
+									"                    console.log(\"✅ Cookie sobrescrita en cookie jar para dominio:\", urlBase);\r",
+									"                    pm.globals.set(\"nombreCookieSesion\", nombre);\r",
+									"                    pm.globals.set(\"valorCookieSesion\", valor);\r",
+									"                    console.log(\"✅ Nombre y valor de cookie guardados en globals:\", nombre, valor);\r",
+									"                }\r",
+									"            });\r",
+									"        }\r",
+									"    } else {\r",
+									"        console.warn(\"⚠️ No se recibió ninguna cookie Set-Cookie en la respuesta.\");\r",
+									"    }\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "12138024-f729afa6-3272-4ac3-a556-84ddd9302102",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{SessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{loginXML}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/Security/sessionLogin?timeStamp={{tiempoActual}}",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"Security",
+								"sessionLogin"
+							],
+							"query": [
+								{
+									"key": "timeStamp",
+									"value": "{{tiempoActual}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "12138024-23af759c-98e4-46bd-892c-f6810b5b3d92"
