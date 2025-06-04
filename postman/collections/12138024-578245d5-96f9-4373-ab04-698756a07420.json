@@ -440,7 +440,7 @@
 									"                    console.warn(\"⚠️ No se pudo eliminar cookie anterior:\", err);\r",
 									"                }\r",
 									"\r",
-									"                // Sobrescribir (guardar) la nueva cookie\r",
+									"                // Guardar nueva cookie en el cookie jar\r",
 									"                pm.cookies.jar().set(urlBase, cookie, function(error) {\r",
 									"                    if (error) {\r",
 									"                        console.warn(\"⚠️ Error al guardar cookie en cookie jar:\", error);\r",
