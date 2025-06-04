@@ -489,7 +489,93 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"id": "12138024-e9c9bd7c-9857-4735-b0d9-8bd6ce44e1b0",
+							"name": "Ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{SessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{loginXML}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/Security/sessionLogin?timeStamp={{tiempoActual}}",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"Security",
+										"sessionLogin"
+									],
+									"query": [
+										{
+											"key": "timeStamp",
+											"value": "{{tiempoActual}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 15:59:57 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "447"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=98"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "WebSession_DBEBFEE6A2=3b44bfffa0cea635c90366f27219897986b598f9ebd78a2266c5eadbfd7ab64e;path=/;HttpOnly;secure"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<SessionLogin version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\n    <statusValue>200</statusValue>\n    <statusString>OK</statusString>\n    <isDefaultPassword>false</isDefaultPassword>\n    <isRiskPassword>false</isRiskPassword>\n    <isActivated>true</isActivated>\n    <sessionTag>1WMJ96WXXBRFEBPY9MOEPL8R2Y0CQMMHL7JJ6IDK6SNLD9646FQU06RJWDXPCAB7</sessionTag>\n    <sessionIDVersion>3</sessionIDVersion>\n</SessionLogin>"
+						}
+					]
 				}
 			],
 			"id": "12138024-23af759c-98e4-46bd-892c-f6810b5b3d92"
