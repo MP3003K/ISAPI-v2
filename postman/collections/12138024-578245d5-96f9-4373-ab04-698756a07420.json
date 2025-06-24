@@ -1353,7 +1353,67 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"id": "12138024-93ff500b-0ffb-48d4-83cd-f982523b95df",
+							"name": "probar conexcion - no necesita autorizacion",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{ip}}/SDK/activateStatus",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"SDK",
+										"activateStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 24 Jun 2025 08:51:35 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "167"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ActivateStatus  version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\n    <Activated>true</Activated>\n</ActivateStatus >"
+						}
+					]
 				}
 			],
 			"id": "12138024-b79407b1-33c8-4989-b001-a07615b81e14"
