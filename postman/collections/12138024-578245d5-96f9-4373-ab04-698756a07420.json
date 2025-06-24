@@ -1029,25 +1029,13 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "Shortveins3003",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "PUT",
 						"header": [
 							{
 								"key": "SessionTag",
-								"value": "{{SessionTag}}",
+								"value": "{{sessionTag}}",
 								"type": "text"
 							}
 						],
