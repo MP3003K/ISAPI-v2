@@ -1405,7 +1405,92 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"id": "12138024-e1bca6ca-e1eb-4b7d-9cee-5109b53a4198",
+							"name": "Ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{sessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "",
+											"value": "{\n  \"faceLibType\": \"blackFD\",\n  \"FDID\": \"1\",\n  \"FPID\": \"mijauk2467\",\n  \"name\": \"MIJAIL\",\n  \"gender\": \"male\",\n  \"bornTime\": \"2001-03-30T00:00:00Z\",\n  \"certificateType\": \"ID\",\n  \"certificateNumber\": \"mijauk2467\",\n  \"employeeNo\": \"mijauk2467\"\n}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text",
+											"uuid": "94f0d082-4d43-4a6d-8c19-56dd131a7b10",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/AccessControl/capabilities",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"AccessControl",
+										"capabilities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 24 Jun 2025 09:11:22 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "6252"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=97"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AccessControl version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\n    <isSupportWiegandCfg>true</isSupportWiegandCfg>\n    <isSupportModuleStatus>true</isSupportModuleStatus>\n    <isSupportIdentityTerminal>true</isSupportIdentityTerminal>\n    <isSupportWiegandRuleCfg>true</isSupportWiegandRuleCfg>\n    <isSupportM1CardEncryptCfg>true</isSupportM1CardEncryptCfg>\n    <isSupportDeployInfo>true</isSupportDeployInfo>\n    <isSupportSupplementLight>true</isSupportSupplementLight>\n    <isSupportFaceCompareCond>true</isSupportFaceCompareCond>\n    <isSupportRemoteControlDoor>true</isSupportRemoteControlDoor>\n    <isSupportUserInfo>true</isSupportUserInfo>\n    <EmployeeNoInfo>\n        <employeeNo min=\"1\" max=\"32\">1</employeeNo>\n        <characterType opt=\"any\"></characterType>\n    </EmployeeNoInfo>\n    <isSupportCardInfo>true</isSupportCardInfo>\n    <isSupportFDLib>true</isSupportFDLib>\n    <isSupportUserInfoDetailDelete>true</isSupportUserInfoDetailDelete>\n    <isSupportFingerPrintCfg>true</isSupportFingerPrintCfg>\n    <isSupportFingerPrintDelete>true</isSupportFingerPrintDelete>\n    <isSupportCaptureFingerPrint>true</isSupportCaptureFingerPrint>\n    <isSupportDoorStatusWeekPlanCfg>true</isSupportDoorStatusWeekPlanCfg>\n    <isSupportVerifyWeekPlanCfg>true</isSupportVerifyWeekPlanCfg>\n    <isSupportCardRightWeekPlanCfg>true</isSupportCardRightWeekPlanCfg>\n    <isSupportDoorStatusHolidayPlanCfg>true</isSupportDoorStatusHolidayPlanCfg>\n    <isSupportVerifyHolidayPlanCfg>true</isSupportVerifyHolidayPlanCfg>\n    <isSupportCardRightHolidayPlanCfg>true</isSupportCardRightHolidayPlanCfg>\n    <isSupportDoorStatusHolidayGroupCfg>true</isSupportDoorStatusHolidayGroupCfg>\n    <isSupportVerifyHolidayGroupCfg>true</isSupportVerifyHolidayGroupCfg>\n    <isSupportUserRightHolidayGroupCfg>true</isSupportUserRightHolidayGroupCfg>\n    <isSupportDoorStatusPlanTemplate>true</isSupportDoorStatusPlanTemplate>\n    <isSupportVerifyPlanTemplate>true</isSupportVerifyPlanTemplate>\n    <isSupportUserRightPlanTemplate>true</isSupportUserRightPlanTemplate>\n    <isSupportDoorStatusPlan>true</isSupportDoorStatusPlan>\n    <isSupportCardReaderPlan>true</isSupportCardReaderPlan>\n    <isSupportClearPlansCfg>true</isSupportClearPlansCfg>\n    <isSupportEventCardNoList>true</isSupportEventCardNoList>\n    <isSupportEventCardLinkageCfg>true</isSupportEventCardLinkageCfg>\n    <isSupportClearEventCardLinkageCfg>true</isSupportClearEventCardLinkageCfg>\n    <isSupportAcsEvent>true</isSupportAcsEvent>\n    <isSupportAcsEventTotalNum>true</isSupportAcsEventTotalNum>\n    <isSupportEventOptimizationCfg>true</isSupportEventOptimizationCfg>\n    <isSupportAcsWorkStatus>true</isSupportAcsWorkStatus>\n    <isSupportDoorCfg>true</isSupportDoorCfg>\n    <isSupportCardReaderCfg>true</isSupportCardReaderCfg>\n    <isSupportAcsCfg>true</isSupportAcsCfg>\n    <isSupportMaskDetection>true</isSupportMaskDetection>\n    <isSupportGroupCfg>true</isSupportGroupCfg>\n    <isSupportClearGroupCfg>true</isSupportClearGroupCfg>\n    <isSupportMultiCardCfg>true</isSupportMultiCardCfg>\n    <isSupportAntiSneakCfg>true</isSupportAntiSneakCfg>\n    <isSupportCardReaderAntiSneakCfg>true</isSupportCardReaderAntiSneakCfg>\n    <isSupportClearAntiSneakCfg>true</isSupportClearAntiSneakCfg>\n    <isSupportClearAntiSneak>true</isSupportClearAntiSneak>\n    <isSupportQRCodeEncryption>true</isSupportQRCodeEncryption>\n    <isSupportQRCodeInfo>true</isSupportQRCodeInfo>\n    <isSupportBluetoothEncryptionInfo>true</isSupportBluetoothEncryptionInfo>\n    <isSupportBluetoothEncryptionVersion>true</isSupportBluetoothEncryptionVersion>\n    <FactoryReset>\n        <isSupportFactoryReset>true</isSupportFactoryReset>\n        <mode opt=\"full,basic,part\"></mode>\n    </FactoryReset>\n    <isSupportCaptureFace>true</isSupportCaptureFace>\n    <isSupportCaptureInfraredFace>true</isSupportCaptureInfraredFace>\n    <isSupportFaceRecognizeMode>true</isSupportFaceRecognizeMode>\n    <isSupportCaptureCardInfo>true</isSupportCaptureCardInfo>\n    <isSupportNFCCfg>true</isSupportNFCCfg>\n    <isSupportRFCardCfg>true</isSupportRFCardCfg>\n    <isSupportMaintenanceDataExport>true</isSupportMaintenanceDataExport>\n    <isSupportLockTypeCfg>true</isSupportLockTypeCfg>\n    <isSupportKeyCfgAttendance>true</isSupportKeyCfgAttendance>\n    <isSupportFingerDataEncryption>true</isSupportFingerDataEncryption>\n    <isSupportAttendanceWeekPlan>true</isSupportAttendanceWeekPlan>\n    <isSupportClearAttendancePlan>true</isSupportClearAttendancePlan>\n    <isSupportAttendanceStatusPlan>true</isSupportAttendanceStatusPlan>\n    <isSupportAttendanceMode>true</isSupportAttendanceMode>\n    <isSupportAttendancePlanTemplate>true</isSupportAttendancePlanTemplate>\n    <isSupportAttendancePlanTemplateList>true</isSupportAttendancePlanTemplateList>\n    <isSupportClearPictureCfg>true</isSupportClearPictureCfg>\n    <isSupportEventStorageCfg>true</isSupportEventStorageCfg>\n    <isSupportCardVerificationRule>true</isSupportCardVerificationRule>\n    <isSupportBluetooth>true</isSupportBluetooth>\n    <isSupportUserAndRightShow>true</isSupportUserAndRightShow>\n    <isSupportAddCustomAudio>true</isSupportAddCustomAudio>\n    <isSupportDeleteCustomAudio>true</isSupportDeleteCustomAudio>\n    <isSupportSearchCustomAudio>true</isSupportSearchCustomAudio>\n    <isSupportEventCardLinkageCfgDelete>true</isSupportEventCardLinkageCfgDelete>\n    <isSupportCustomPrompt>true</isSupportCustomPrompt>\n    <isSupportClearUserAuthenticationTimes>true</isSupportClearUserAuthenticationTimes>\n    <isSupportSearchModelFailRecord>true</isSupportSearchModelFailRecord>\n    <isSupportLocalUserChangeRecordParam>true</isSupportLocalUserChangeRecordParam>\n    <isSupportSearchLocalUserChange>true</isSupportSearchLocalUserChange>\n    <isSupportReaderAuthenticationMode>true</isSupportReaderAuthenticationMode>\n    <isSupportLocalUserChangeAcknowledgment>true</isSupportLocalUserChangeAcknowledgment>\n    <isSupportCheckEngineeringModeSecurityCode>true</isSupportCheckEngineeringModeSecurityCode>\n    <isSupportReaderEngineeringModeParams>true</isSupportReaderEngineeringModeParams>\n    <isSupportPwMgrParams>true</isSupportPwMgrParams>\n    <isSupportGetUserAvailablePw>true</isSupportGetUserAvailablePw>\n    <isSupportUserAvailablePwQueryAcknowledgment>true</isSupportUserAvailablePwQueryAcknowledgment>\n    <isSupportUnlockAntiAttack>true</isSupportUnlockAntiAttack>\n    <isSupportCustomPersonnelType>true</isSupportCustomPersonnelType>\n    <isSupportTouchRecognitionParams>true</isSupportTouchRecognitionParams>\n    <notRelateReaderDoorIDList>\n        <notRelateReaderDoorID>\n            <doorID>2</doorID>\n        </notRelateReaderDoorID>\n    </notRelateReaderDoorIDList>\n    <isSupportGetShowModeThumbnailsList>true</isSupportGetShowModeThumbnailsList>\n</AccessControl>"
+						}
+					]
 				},
 				{
 					"name": "Capacidades Rostros",
