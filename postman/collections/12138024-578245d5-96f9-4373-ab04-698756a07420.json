@@ -1193,48 +1193,6 @@
 					]
 				},
 				{
-					"name": "Ver rostro asignado a una persona",
-					"id": "12138024-47c80833-3fac-454a-b5a4-69a565ed7601",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "SessionTag",
-								"value": "{{sessionTag}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"searchResultPosition\": 0,\r\n  \"maxResults\": 10,\r\n  \"faceLibType\": \"blackFD\",\r\n  \"FDID\": \"1\"\r\n}\r\n"
-						},
-						"url": {
-							"raw": "https://192.168.18.248/LOCALS/pic/enrlFace/0/0000000002.jpg@WEB000000000053",
-							"protocol": "https",
-							"host": [
-								"192",
-								"168",
-								"18",
-								"248"
-							],
-							"path": [
-								"LOCALS",
-								"pic",
-								"enrlFace",
-								"0",
-								"0000000002.jpg@WEB000000000053"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Lista Rostros Creados",
 					"id": "12138024-90e7732b-b0f3-490c-83b9-0dcbc9fd8e21",
 					"protocolProfileBehavior": {
@@ -1355,6 +1313,48 @@
 							"body": "{\n    \"statusCode\": 1,\n    \"statusString\": \"OK\",\n    \"subStatusCode\": \"ok\",\n    \"responseStatusStrg\": \"OK\",\n    \"numOfMatches\": 1,\n    \"totalMatches\": 1,\n    \"MatchList\": [\n        {\n            \"FPID\": \"2019113229a\",\n            \"faceURL\": \"https://172.16.1.2/LOCALS/pic/enrlFace/0/0000000001.jpg@WEB000000000002\",\n            \"modelData\": \"RlI3MDI3MDYBAAAAAAAAAPrcVP4HgCMCIQcq3hMv5jgqEPUsXAVIxO/X6B7PHRzyBBIlzOrRGswZIOje3w4p7AyyQBQUt5JoHrz4F+HtCvbEMS7q0sJOEtX1G+7x3+juBRnWIRr27PsLDNIwCEQYBQIlzShbxPjetgcaZi/ZDfUxDOcs8xT4/q4h6N5GG+8KGv/3A7o1CwYZE/7y5AoS3zMbrCb5zP03HX/wHOfrG/cZgLPsF/bzL0w4EVVS76AsujAK/CUEsU8AxcS4QivIIAu2vxk23q+2//PpxQUxyNrAYfjyvEva+vk41TvsDuXf9R4B5v8HvEQoIzTQAfwIJTs0M/sE9P/FRjf4JhHCEUc=\"\n        }\n    ]\n}"
 						}
 					]
+				},
+				{
+					"name": "Ver rostro asignado a una persona",
+					"id": "12138024-47c80833-3fac-454a-b5a4-69a565ed7601",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{sessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchResultPosition\": 0,\r\n  \"maxResults\": 10,\r\n  \"faceLibType\": \"blackFD\",\r\n  \"FDID\": \"1\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://192.168.18.248/LOCALS/pic/enrlFace/0/0000000002.jpg@WEB000000000053",
+							"protocol": "https",
+							"host": [
+								"192",
+								"168",
+								"18",
+								"248"
+							],
+							"path": [
+								"LOCALS",
+								"pic",
+								"enrlFace",
+								"0",
+								"0000000002.jpg@WEB000000000053"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "Capacidades Dispositivo",
