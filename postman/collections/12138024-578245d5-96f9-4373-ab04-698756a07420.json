@@ -1634,7 +1634,7 @@
 					"response": [
 						{
 							"id": "12138024-93ff500b-0ffb-48d4-83cd-f982523b95df",
-							"name": "probar conexcion - no necesita autorizacion",
+							"name": "Ok",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
