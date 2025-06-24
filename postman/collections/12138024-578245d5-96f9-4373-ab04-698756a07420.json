@@ -1276,7 +1276,85 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"id": "12138024-494625fd-33f2-4fac-a9f1-a777ef806349",
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{sessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"searchResultPosition\": 0,\r\n  \"maxResults\": 10,\r\n  \"faceLibType\": \"blackFD\",\r\n  \"FDID\": \"1\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/Intelligent/FDLib/FDSearch?format=json",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"Intelligent",
+										"FDLib",
+										"FDSearch"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 24 Jun 2025 09:07:13 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "657"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"statusCode\": 1,\n    \"statusString\": \"OK\",\n    \"subStatusCode\": \"ok\",\n    \"responseStatusStrg\": \"OK\",\n    \"numOfMatches\": 1,\n    \"totalMatches\": 1,\n    \"MatchList\": [\n        {\n            \"FPID\": \"2019113229a\",\n            \"faceURL\": \"https://172.16.1.2/LOCALS/pic/enrlFace/0/0000000001.jpg@WEB000000000002\",\n            \"modelData\": \"RlI3MDI3MDYBAAAAAAAAAPrcVP4HgCMCIQcq3hMv5jgqEPUsXAVIxO/X6B7PHRzyBBIlzOrRGswZIOje3w4p7AyyQBQUt5JoHrz4F+HtCvbEMS7q0sJOEtX1G+7x3+juBRnWIRr27PsLDNIwCEQYBQIlzShbxPjetgcaZi/ZDfUxDOcs8xT4/q4h6N5GG+8KGv/3A7o1CwYZE/7y5AoS3zMbrCb5zP03HX/wHOfrG/cZgLPsF/bzL0w4EVVS76AsujAK/CUEsU8AxcS4QivIIAu2vxk23q+2//PpxQUxyNrAYfjyvEva+vk41TvsDuXf9R4B5v8HvEQoIzTQAfwIJTs0M/sE9P/FRjf4JhHCEUc=\"\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Capacidades Dispositivo",
