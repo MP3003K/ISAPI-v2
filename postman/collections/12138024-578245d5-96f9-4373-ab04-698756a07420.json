@@ -1559,7 +1559,98 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"id": "12138024-b159c3bd-20dc-4412-aadf-925214d61f05",
+							"name": "Ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{sessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "JSON_SetFaceRecord",
+											"value": "{\n    \"faceLibType\": \"blackFD\",\n    \"FDID\": \"1\", \n    \"FPID\": \"mijauk2467\",\n    \"name\": \"MIJAIL\",\n    \"bornTime\": \"2001-03-30T00:00:00Z\",\n    \"employeeNo\": \"mijauk2467\"\n}",
+											"type": "text",
+											"uuid": "7e1960e8-97df-4875-a461-04a14ff00cfa"
+										},
+										{
+											"key": "FaceImage",
+											"type": "file",
+											"uuid": "173e8def-1d4f-4f94-a281-2ee1f69e8c0a",
+											"src": "/C:/Users/nitro/Downloads/hikvision.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/Intelligent/FDLib/capabilities?format=json",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"Intelligent",
+										"FDLib",
+										"capabilities"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 24 Jun 2025 09:11:34 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "807"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"statusCode\": 1,\n    \"statusString\": \"OK\",\n    \"subStatusCode\": \"ok\",\n    \"FDNameMaxLen\": 48,\n    \"customInfoMaxLen\": 0,\n    \"FDMaxNum\": 2,\n    \"FDRecordDataMaxNum\": 3000,\n    \"supportFDFunction\": \"post,delete,get,put,setUp\",\n    \"isSuportFDSearch\": true,\n    \"isSupportFDSearchDataPackage\": false,\n    \"isSuportFSsearchByPic\": false,\n    \"isSuportFSsearchByPicGenerate\": false,\n    \"isSuportFDSearchDuplicate\": false,\n    \"isSuportFDSearchDuplicateGenerate\": false,\n    \"isSuportFCSearch\": false,\n    \"isSupportFCSearchDataPackage\": false,\n    \"isSupportFDExecuteControl\": false,\n    \"generateMaxNum\": 0,\n    \"faceLibType\": \"blackFD\",\n    \"modelMaxNum\": 1,\n    \"isSupportModelData\": true,\n    \"isSupportControlPersonRecordByHumanId\": true,\n    \"faceURLLen\": 1024,\n    \"featurePointTypeList\": [\n        \"face\",\n        \"leftEye\",\n        \"rightEye\",\n        \"leftMouthCorner\",\n        \"rightMouthCorner\",\n        \"nose\"\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "probar conexcion - no necesita autorizacion",
