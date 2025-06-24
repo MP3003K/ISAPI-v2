@@ -1342,13 +1342,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://192.168.0.101/SDK/activateStatus",
+							"raw": "https://{{ip}}/SDK/activateStatus",
 							"protocol": "https",
 							"host": [
-								"192",
-								"168",
-								"0",
-								"101"
+								"{{ip}}"
 							],
 							"path": [
 								"SDK",
