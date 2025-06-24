@@ -1115,7 +1115,7 @@
 					"response": [
 						{
 							"id": "12138024-f3522b19-bc53-418a-bedd-e4cd7813f3a1",
-							"name": "Buscar Personas",
+							"name": "Ok",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -1279,7 +1279,7 @@
 					"response": [
 						{
 							"id": "12138024-494625fd-33f2-4fac-a9f1-a777ef806349",
-							"name": "OK",
+							"name": "Ok",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
