@@ -1315,48 +1315,6 @@
 					]
 				},
 				{
-					"name": "Ver rostro asignado a una persona",
-					"id": "12138024-47c80833-3fac-454a-b5a4-69a565ed7601",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "SessionTag",
-								"value": "{{sessionTag}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"searchResultPosition\": 0,\r\n  \"maxResults\": 10,\r\n  \"faceLibType\": \"blackFD\",\r\n  \"FDID\": \"1\"\r\n}\r\n"
-						},
-						"url": {
-							"raw": "https://192.168.18.248/LOCALS/pic/enrlFace/0/0000000002.jpg@WEB000000000053",
-							"protocol": "https",
-							"host": [
-								"192",
-								"168",
-								"18",
-								"248"
-							],
-							"path": [
-								"LOCALS",
-								"pic",
-								"enrlFace",
-								"0",
-								"0000000002.jpg@WEB000000000053"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Capacidades Dispositivo",
 					"id": "12138024-950bfe18-d950-40a5-8096-b2e0baade37a",
 					"protocolProfileBehavior": {
