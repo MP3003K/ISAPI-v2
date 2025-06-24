@@ -1340,7 +1340,21 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "https://192.168.0.101/SDK/activateStatus",
+							"protocol": "https",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"101"
+							],
+							"path": [
+								"SDK",
+								"activateStatus"
+							]
+						}
 					},
 					"response": []
 				}
