@@ -1778,6 +1778,18 @@
 				}
 			],
 			"id": "12138024-b79407b1-33c8-4989-b001-a07615b81e14"
+		},
+		{
+			"name": "New Request",
+			"id": "12138024-e4535e42-257b-4778-bdad-cb726c829563",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"auth": {
