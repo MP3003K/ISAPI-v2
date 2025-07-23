@@ -1394,6 +1394,83 @@
 							"cookie": [],
 							"responseTime": null,
 							"body": "{\n    \"UserInfoSearch\": {\n        \"searchID\": \"1\",\n        \"responseStatusStrg\": \"OK\",\n        \"numOfMatches\": 2,\n        \"totalMatches\": 2,\n        \"UserInfo\": [\n            {\n                \"employeeNo\": \"1\",\n                \"name\": \"admin\",\n                \"userType\": \"normal\",\n                \"closeDelayEnabled\": false,\n                \"Valid\": {\n                    \"enable\": true,\n                    \"beginTime\": \"2025-06-24T00:00:00\",\n                    \"endTime\": \"2035-06-23T23:59:59\",\n                    \"timeType\": \"local\"\n                },\n                \"belongGroup\": \"\",\n                \"password\": \"\",\n                \"doorRight\": \"1\",\n                \"RightPlan\": [\n                    {\n                        \"doorNo\": 1,\n                        \"planTemplateNo\": \"1\"\n                    }\n                ],\n                \"maxOpenDoorTime\": 0,\n                \"openDoorTime\": 0,\n                \"roomNumber\": 0,\n                \"floorNumber\": 0,\n                \"localUIRight\": true,\n                \"gender\": \"unknown\",\n                \"numOfCard\": 1,\n                \"numOfFP\": 0,\n                \"numOfFace\": 0,\n                \"PersonInfoExtends\": [\n                    {\n                        \"value\": \"\"\n                    }\n                ],\n                \"picID\": \"4\"\n            },\n            {\n                \"employeeNo\": \"2019113229a\",\n                \"name\": \"Mijail Palomino Rodriguez\",\n                \"userType\": \"normal\",\n                \"closeDelayEnabled\": false,\n                \"Valid\": {\n                    \"enable\": false,\n                    \"beginTime\": \"\",\n                    \"endTime\": \"\",\n                    \"timeType\": \"local\"\n                },\n                \"belongGroup\": \"\",\n                \"password\": \"\",\n                \"doorRight\": \"1\",\n                \"RightPlan\": [\n                    {\n                        \"doorNo\": 1,\n                        \"planTemplateNo\": \"1\"\n                    }\n                ],\n                \"maxOpenDoorTime\": 0,\n                \"openDoorTime\": 0,\n                \"roomNumber\": 0,\n                \"floorNumber\": 0,\n                \"localUIRight\": false,\n                \"gender\": \"male\",\n                \"numOfCard\": 1,\n                \"numOfFP\": 0,\n                \"numOfFace\": 1,\n                \"PersonInfoExtends\": [\n                    {\n                        \"value\": \"\"\n                    }\n                ],\n                \"faceURL\": \"https://172.16.1.2/LOCALS/pic/enrlFace/0/0000000001.jpg@WEB000000000001\",\n                \"picID\": \"4\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"id": "12138024-d42498c9-0f17-418e-8002-0301d2b1144c",
+							"name": "Buscar Persona",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{sessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"UserInfoSearchCond\": {\r\n    \"searchID\": \"verificarPersona\",\r\n    \"searchResultPosition\": 0,\r\n    \"maxResults\": 1,\r\n    \"EmployeeNoList\": [\r\n      {\r\n        \"employeeNo\": \"STU017\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n"
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/AccessControl/UserInfo/Search?format=json",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"AccessControl",
+										"UserInfo",
+										"Search"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 23 Jul 2025 16:49:50 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "139"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"UserInfoSearch\": {\n        \"searchID\": \"verificarPersona2\",\n        \"responseStatusStrg\": \"NO MATCH\",\n        \"numOfMatches\": 0,\n        \"totalMatches\": 0\n    }\n}"
 						}
 					]
 				},
