@@ -1276,7 +1276,7 @@
 					]
 				},
 				{
-					"name": "Buscar Personas Copy",
+					"name": "eliminar todo",
 					"id": "12138024-6955264c-4a26-495e-a5c3-e6c36ad04fc3",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
