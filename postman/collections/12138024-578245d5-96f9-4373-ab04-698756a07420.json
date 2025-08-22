@@ -2420,7 +2420,7 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "SessionTag",
@@ -2430,7 +2430,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<HttpHostNotificationList version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\r\n  <HttpHostNotification>\r\n    <id>1</id>\r\n    <url>/access-control/callback</url>\r\n    <protocolType>HTTP</protocolType>\r\n    <parameterFormatType>XML</parameterFormatType>\r\n    <addressingFormatType>hostname</addressingFormatType>\r\n    <hostName>192.168.18.31</hostName>\r\n    <portNo>8002</portNo>\r\n    <httpAuthenticationMethod>none</httpAuthenticationMethod>\r\n    <SubscribeEvent>\r\n      <heartbeat>30</heartbeat>\r\n      <eventMode>all</eventMode>\r\n      <EventList>\r\n        <Event>\r\n          <type>AccessControllerEvent</type>\r\n        </Event>\r\n      </EventList>\r\n    </SubscribeEvent>\r\n  </HttpHostNotification>\r\n</HttpHostNotificationList>",
+							"raw": "<SubscribeEvent version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\r\n  <heartbeat>30</heartbeat>\r\n  <eventMode>all</eventMode>\r\n</SubscribeEvent>\r\n",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -2438,7 +2438,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/ISAPI/Event/notification/httpHosts",
+							"raw": "https://{{ip}}/ISAPI/Event/notification/subscribeEvent",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
@@ -2447,7 +2447,7 @@
 								"ISAPI",
 								"Event",
 								"notification",
-								"httpHosts"
+								"subscribeEvent"
 							]
 						}
 					},
