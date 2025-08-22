@@ -2531,6 +2531,123 @@
 					]
 				},
 				{
+					"name": "host existentes Copy",
+					"id": "12138024-59e83c1b-b8ad-4cd2-952d-25863657e908",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "SessionTag",
+								"value": "{{sessionTag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<HttpHostNotificationList version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\r\n  <HttpHostNotification>\r\n    <id>1</id>\r\n    <url>/access-control/callback</url>\r\n    <protocolType>HTTP</protocolType>\r\n    <parameterFormatType>XML</parameterFormatType>\r\n    <addressingFormatType>hostname</addressingFormatType>\r\n    <hostName>192.168.18.31</hostName>\r\n    <portNo>8002</portNo>\r\n    <httpAuthenticationMethod>none</httpAuthenticationMethod>\r\n    <SubscribeEvent>\r\n      <heartbeat>30</heartbeat>\r\n      <eventMode>all</eventMode>\r\n      <EventList>\r\n        <Event>\r\n          <type>AccessControllerEvent</type>\r\n        </Event>\r\n      </EventList>\r\n    </SubscribeEvent>\r\n  </HttpHostNotification>\r\n</HttpHostNotificationList>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}/ISAPI/Event/notification/httpHosts",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"path": [
+								"ISAPI",
+								"Event",
+								"notification",
+								"httpHosts"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "12138024-ee54d602-3679-420f-ad6d-e0617db2b661",
+							"name": "Ok",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "SessionTag",
+										"value": "{{sessionTag}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<HttpHostNotificationList version=\"2.0\" xmlns=\"http://www.isapi.org/ver20/XMLSchema\">\r\n  <HttpHostNotification>\r\n    <id>1</id>\r\n    <url>/access-control/callback</url>\r\n    <protocolType>HTTP</protocolType>\r\n    <parameterFormatType>XML</parameterFormatType>\r\n    <addressingFormatType>hostname</addressingFormatType>\r\n    <hostName>192.168.18.31</hostName>\r\n    <portNo>8002</portNo>\r\n    <httpAuthenticationMethod>none</httpAuthenticationMethod>\r\n    <SubscribeEvent>\r\n      <eventMode>all</eventMode>\r\n      <EventList>\r\n        <Event>\r\n          <type>AccessControllerEvent</type>\r\n          <pictureURLType>binary</pictureURLType>\r\n        </Event>\r\n      </EventList>\r\n    </SubscribeEvent>\r\n  </HttpHostNotification>\r\n</HttpHostNotificationList>\r\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{ip}}/ISAPI/Event/notification/httpHosts",
+									"protocol": "https",
+									"host": [
+										"{{ip}}"
+									],
+									"path": [
+										"ISAPI",
+										"Event",
+										"notification",
+										"httpHosts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Jul 2025 21:07:48 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Length",
+									"value": "257"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=97"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ResponseStatus version=\"1.0\" xmlns=\"http://www.hikvision.com/ver10/XMLSchema\">\n    <requestURL></requestURL>\n    <statusCode>1</statusCode>\n    <statusString>OK</statusString>\n    <subStatusCode>ok</subStatusCode>\n</ResponseStatus>"
+						}
+					]
+				},
+				{
 					"name": "pruebas",
 					"id": "12138024-40cd76d1-0591-4050-b4c6-3ea30610cf70",
 					"protocolProfileBehavior": {
